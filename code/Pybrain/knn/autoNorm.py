@@ -1,4 +1,8 @@
 import numpy as np
+'''
+(a, b, c, d, e) --->  (0, b-a, c-a, d-a, e-a)
+---> (0, b-a/e-a, c-a/e-a, d-a/e-a, 1)
+'''
 
 
 def autoNorm(dataset):
