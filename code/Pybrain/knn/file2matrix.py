@@ -5,9 +5,12 @@ def file2matrix(filename):
     fr = open(filename)
     arrayoline = fr.readlines()
     numberoflines = len(arrayoline)
+    # get the lines of file
     returnmatrix = np.zeros((numberoflines, 3))
+    # create a matrix same to the data
     classlabervector = []
     index = 0
+    # read data to matrix
     for line in arrayoline:
         line = line.strip()
         listfromline = line.split('\t')
