@@ -39,8 +39,9 @@ def createDataSet():
 
 def file2matrix(filename):
     data = loadtxt(filename)
-    returnMat, classLaberVector = data[:,0:3], data[:,-1]
-    return returnMat, classLaberVector
+    returnMat, classLaberVector = data[:, 0:3], data[:, -1]
+    classlabelvector  = classLaberVector.astype(int)
+    return returnMat, classlabelvector
 
 
 def autoNorm(dataSet):
@@ -56,8 +57,9 @@ def autoNorm(dataSet):
 
 def datingClassTest():
     hoRatio = 0.50  # 50%的数据进行训练, 50%的数据作为验证
-    datingDataMat, datingLabels = file2matrix('/Users/zhangjiawei/Dropbox/Machine-Learning\
-/code/make-love/knn/datingTestSet2.txt')  #load data setfrom file
+    datingDataMat, datingLabels = file2matrix('/Users/zhangjiawei/\
+Dropbox/Machine-Learning/code/make-love/knn/datingTestSet2.txt')
+    # load dataset from file
     # 首先对数据进行归一化
     normMat, ranges, minVals = autoNorm(datingDataMat)
     m = normMat.shape[0]
@@ -68,7 +70,8 @@ def datingClassTest():
                                      datingLabels[numTestVecs:m], 3)
         print "the classifier came back with: %d, the real answer is: %d" % (
             classifierResult, datingLabels[i])
-        if (classifierResult != datingLabels[i]): errorCount += 1.0
+        if (classifierResult != datingLabels[i]):
+            errorCount += 1.0
     print "the total error rate is: %f" % (errorCount / float(numTestVecs))
     print errorCount
 
@@ -112,6 +115,17 @@ def handwritingClassTest():
 
 # datingClassTest()    # 分类器针对约会网站的测试代码
 
-filename='/Users/zhangjiawei/Dropbox/Machine-Learning\
-/code/make-love/knn/datingTestSet2.txt'
-print file2matrix(filename)
+
+
+
+def classfyperson():
+    resultlist = ['not at all', 'in small does', 'in large doss']
+    percentTats = float(raw_input("percentage of time spent playing video games?"))
+    ffMiles = float(raw_input("frequent filer miles earned per year?"))
+    iceCream = float(raw_input("liters of ice cream consumed per year?"))
+    datingdatamat, datinglabels = file2matrix('/Users/zhangjiawei/Dropbox/Machine-Learning/code/make-love/knn/datingTestSet2.txt')
+    inArr = array([ffMiles, percentTats, iceCream])
+    classifierResult = classify0(inArr, datingdatamat, datinglabels, 3)
+    print "you will probably like this person: ", resultlist[classifierResult - 1]
+
+classfyperson()
