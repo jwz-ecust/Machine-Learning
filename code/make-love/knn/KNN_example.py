@@ -38,10 +38,27 @@ def createDataSet():
 
 
 def file2matrix(filename):
+<<<<<<< HEAD
     data = loadtxt(filename)
     returnMat, classLaberVector = data[:, 0:3], data[:, -1]
     classlabelvector  = classLaberVector.astype(int)
     return returnMat, classlabelvector
+=======
+    fr = open(filename)
+    lines = fr.readlines()
+    numberOfLines = len(lines)  #get the number of lines in the file
+    returnMat = zeros((numberOfLines, 3))  #prepare matrix to return
+    classLabelVector = []  #prepare labels return
+    index = 0
+    for line in lines:
+        line = line.strip()
+        listFromLine = line.split('\t')
+        returnMat[index, :] = listFromLine[0:3]
+        classLabelVector.append(int(listFromLine[-1]))
+        index += 1
+    fr.close()
+    return returnMat, classLabelVector
+>>>>>>> f08d54db75abb441c25ebffad608f8cf9e77cccc
 
 
 def autoNorm(dataSet):
@@ -57,9 +74,14 @@ def autoNorm(dataSet):
 
 def datingClassTest():
     hoRatio = 0.50  # 50%的数据进行训练, 50%的数据作为验证
+<<<<<<< HEAD
     datingDataMat, datingLabels = file2matrix('/Users/zhangjiawei/\
 Dropbox/Machine-Learning/code/make-love/knn/datingTestSet2.txt')
     # load dataset from file
+=======
+    datingDataMat, datingLabels = file2matrix('/Users/zhangjiawei/Dropbox/Machine-Learning\
+/code/make-love/knn/datingTestSet2.txt')  #load data setfrom file
+>>>>>>> f08d54db75abb441c25ebffad608f8cf9e77cccc
     # 首先对数据进行归一化
     normMat, ranges, minVals = autoNorm(datingDataMat)
     m = normMat.shape[0]
@@ -113,6 +135,7 @@ def handwritingClassTest():
     print "\nthe total error rate is: %f" % (errorCount / float(mTest))
 
 
+<<<<<<< HEAD
 # datingClassTest()    # 分类器针对约会网站的测试代码
 
 
@@ -129,3 +152,6 @@ def classfyperson():
     print "you will probably like this person: ", resultlist[classifierResult - 1]
 
 classfyperson()
+=======
+datingClassTest()    # 分类器针对约会网站的测试代码
+>>>>>>> f08d54db75abb441c25ebffad608f8cf9e77cccc

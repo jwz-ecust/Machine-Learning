@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 import os
 import operator
+'''
+K-邻近算法, 执行效率偏低
+每次需要2000次距离计算, 每个距离包含了1024个纬度浮计算
+'''
+
 
 def img2vector(filename):
     returnvector = np.zeros((1, 1024))
@@ -8,14 +14,9 @@ def img2vector(filename):
     linestr = fr.readlines()
     for i in range(32):
         for j in range(32):
-            returnvector[0, 32*i+j] = int(linestr[i][j])
+            returnvector[0, 32 * i + j] = int(linestr[i][j])
     return returnvector
     fr.close()
-
-
-# path = '/Users/zhangjiawei/Dropbox/Machine-Learning/code/make-love/knn/digits/testDigits/0_0.txt'
-# print img2vector(path)
-
 
 
 def classify0(inX, dataSet, labels, k):
@@ -34,7 +35,6 @@ def classify0(inX, dataSet, labels, k):
     return sortedClassCount[0][0]
 
 
-
 def handwritingclasstest():
     hwlabels = []
     path = '/Users/zhangjiawei/Dropbox/Machine-Learning/code/make-love/knn/digits'
@@ -48,21 +48,24 @@ def handwritingclasstest():
         filestr = filenamestr.split('.')[0]
         classnumstr = int(filestr.split('_')[0])
         hwlabels.append(classnumstr)
-        trainingmatrix[i, :] = img2vector(os.path.join(train_path, filenamestr))
-    print trainingmatrix
+        trainingmatrix[i, :] = img2vector(
+            os.path.join(train_path, filenamestr))
     testfilelist = os.listdir(test_path)
     errorcount = 0.0
     mytest = len(testfilelist)
     for i in range(mytest):
         filenamestr = testfilelist[i]
         filestr = filenamestr.split('.')[0]
-        classnummstr = int(filestr.split('_')[0])
+        classnumstr = int(filestr.split('_')[0])
         vectorundertest = img2vector(os.path.join(test_path, filenamestr))
-        classifierresult = classify0(vectorundertest, trainingmatrix, hwlabels, 3)
-        print "the classifier came back with: %d, the real answer is: %d" % (classifierresult, classnumstr)
+        classifierresult = classify0(
+            vectorundertest, trainingmatrix, hwlabels, 3)
         if classifierresult != classnumstr:
             errorcount += 1
+            print "the wrong file is: %s" % filenamestr
+            print "the classifier came back with: %d, the real answer is: %d" % (classifierresult, classnumstr)
     print "\nthe total number of error is: %d" % errorcount
-    print "\nthe error rate is: %f" %(errorcount/float(mytest))
+    print "\nthe error rate is: %f" % (errorcount / float(mytest))
+
 
 handwritingclasstest()
