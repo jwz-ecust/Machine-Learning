@@ -64,9 +64,9 @@ def autoNorm(dataSet):
 
 
 def datingClassTest():
-    hoRatio = 0.50  #hold out 10%
-    datingDataMat, datingLabels = file2matrix(
-        'datingTestSet2.txt')  #load data setfrom file
+    hoRatio = 0.10  #hold out 10%
+    datingDataMat, datingLabels = file2matrix('/Users/zhangjiawei/Dropbox/Machine-Learning\
+/code/Pybrain/knn/datingTestSet2.txt')  #load data setfrom file
     normMat, ranges, minVals = autoNorm(datingDataMat)
     m = normMat.shape[0]
     numTestVecs = int(m * hoRatio)
@@ -116,3 +116,6 @@ def handwritingClassTest():
         if (classifierResult != classNumStr): errorCount += 1.0
     print "\nthe total number of errors is: %d" % errorCount
     print "\nthe total error rate is: %f" % (errorCount / float(mTest))
+
+
+datingClassTest()
