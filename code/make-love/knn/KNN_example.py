@@ -38,20 +38,9 @@ def createDataSet():
 
 
 def file2matrix(filename):
-    fr = open(filename)
-    lines = fr.readlines()
-    numberOfLines = len(lines)  #get the number of lines in the file
-    returnMat = zeros((numberOfLines, 3))  #prepare matrix to return
-    classLabelVector = []  #prepare labels return
-    index = 0
-    for line in lines:
-        line = line.strip()
-        listFromLine = line.split('\t')
-        returnMat[index, :] = listFromLine[0:3]
-        classLabelVector.append(int(listFromLine[-1]))
-        index += 1
-    fr.close()
-    return returnMat, classLabelVector
+    data = loadtxt(filename)
+    returnMat, classLaberVector = data[:,0:3], data[:,-1]
+    return returnMat, classLaberVector
 
 
 def autoNorm(dataSet):
@@ -121,4 +110,8 @@ def handwritingClassTest():
     print "\nthe total error rate is: %f" % (errorCount / float(mTest))
 
 
-datingClassTest()    # 分类器针对约会网站的测试代码
+# datingClassTest()    # 分类器针对约会网站的测试代码
+
+filename='/Users/zhangjiawei/Dropbox/Machine-Learning\
+/code/make-love/knn/datingTestSet2.txt'
+print file2matrix(filename)
