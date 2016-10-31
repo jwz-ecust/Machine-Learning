@@ -39,17 +39,18 @@ def createDataSet():
 
 def file2matrix(filename):
     fr = open(filename)
-    numberOfLines = len(fr.readlines())  #get the number of lines in the file
+    lines = fr.readlines()
+    numberOfLines = len(lines)  #get the number of lines in the file
     returnMat = zeros((numberOfLines, 3))  #prepare matrix to return
     classLabelVector = []  #prepare labels return
-    fr = open(filename)
     index = 0
-    for line in fr.readlines():
+    for line in lines:
         line = line.strip()
         listFromLine = line.split('\t')
         returnMat[index, :] = listFromLine[0:3]
         classLabelVector.append(int(listFromLine[-1]))
         index += 1
+    fr.close()
     return returnMat, classLabelVector
 
 
@@ -65,9 +66,9 @@ def autoNorm(dataSet):
 
 
 def datingClassTest():
-    hoRatio = 0.10  # 90%的数据进行训练, 10%的数据作为验证
+    hoRatio = 0.50  # 50%的数据进行训练, 50%的数据作为验证
     datingDataMat, datingLabels = file2matrix('/Users/zhangjiawei/Dropbox/Machine-Learning\
-/code/Pybrain/knn/datingTestSet2.txt')  #load data setfrom file
+/code/make-love/knn/datingTestSet2.txt')  #load data setfrom file
     # 首先对数据进行归一化
     normMat, ranges, minVals = autoNorm(datingDataMat)
     m = normMat.shape[0]
@@ -120,4 +121,4 @@ def handwritingClassTest():
     print "\nthe total error rate is: %f" % (errorCount / float(mTest))
 
 
-datingClassTest()
+datingClassTest()    # 分类器针对约会网站的测试代码
