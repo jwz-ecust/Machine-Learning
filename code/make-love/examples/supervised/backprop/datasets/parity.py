@@ -6,8 +6,9 @@ from pybrain.datasets import SequentialDataSet
 
 class ParityDataSet(SequentialDataSet):
     """ Determine whether the bitstring up to the current point conains a pair number of 1s or not."""
+
     def __init__(self):
-        SequentialDataSet.__init__(self, 1,1)
+        SequentialDataSet.__init__(self, 1, 1)
 
         self.newSequence()
         self.addSample([-1], [-1])
@@ -51,3 +52,9 @@ class ParityDataSet(SequentialDataSet):
         self.addSample([-1], [-1])
         self.addSample([-1], [-1])
         self.addSample([1], [1])
+
+
+a = ParityDataSet()
+for i in a:
+    for m, n in i:
+        print m, n

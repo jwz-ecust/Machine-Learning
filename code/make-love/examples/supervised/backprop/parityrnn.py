@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 
 #!/usr/bin/env python
@@ -11,6 +12,7 @@ from pybrain.structure import RecurrentNetwork, LinearLayer, TanhLayer, BiasUnit
 
 
 def buildParityNet():
+    # Generate a recurrent network 生成递归神经网络(也叫循环神经网络)
     net = RecurrentNetwork()
     net.addInputModule(LinearLayer(1, name='i'))
     net.addModule(TanhLayer(2, name='h'))
@@ -33,17 +35,16 @@ def buildParityNet():
 def evalRnnOnSeqDataset(net, DS, verbose=False, silent=False):
     """ evaluate the network on all the sequences of a dataset. """
     r = 0.
-    samples = 0.
+    samples = DS.getLength()
     for seq in DS:
         net.reset()
         for i, t in seq:
             res = net.activate(i)
             if verbose:
                 print(t, res)
-            r += sum((t-res)**2)
-            samples += 1
+            r += sum((t - res)**2)
         if verbose:
-            print('-'*20)
+            print('-' * 20)
     r /= samples
     if not silent:
         print('MSE:', r)
@@ -57,9 +58,10 @@ if __name__ == "__main__":
     N.randomize()
     evalRnnOnSeqDataset(N, DS)
     print('(random weights)')
-    # Backprop improves the network performance, and sometimes even finds the global optimum.
+    # Backprop improves the network performance, and sometimes even finds the
+    # global optimum.
     N.reset()
     bp = BackpropTrainer(N, DS, verbose=True)
-    bp.trainEpochs(5000)
+    bp.trainEpochs(100)
     evalRnnOnSeqDataset(N, DS)
     print('(backprop-trained weights)')

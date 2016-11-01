@@ -27,7 +27,7 @@ def testTraining():
 
     # initialize the backprop trainer and train
     t = BackpropTrainer(n, learningrate=0.1, momentum=0.0, verbose=True)
-    t.trainOnDataset(d, 200)
+    t.trainOnDataset(d, 2000)
 
     # the resulting weights are in the network:
     print('Final weights:', n.params)
