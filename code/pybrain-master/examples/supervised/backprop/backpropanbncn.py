@@ -26,7 +26,7 @@ def testTraining():
     n.addRecurrentConnection(FullConnection(n['h'], n['h']))
     n.sortModules()
 
-    # initialize the backprop trainer and train
+    # initialize the backprop trainer and train (100 times)
     t = BackpropTrainer(n, learningrate=0.1, momentum=0.0, verbose=True)
     t.trainOnDataset(d, 100)
 
