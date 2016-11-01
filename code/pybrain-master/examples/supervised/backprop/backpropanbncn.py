@@ -1,5 +1,4 @@
-from __future__ import print_function
-
+from __future__ import print_function    # use print function in python3
 #!/usr/bin/env python
 # A simple recurrent neural network that learns a simple sequential data set.
 
