@@ -2,7 +2,7 @@ from __future__ import print_function    # use print function in python3
 #!/usr/bin/env python
 # A simple recurrent neural network that learns a simple sequential data set.
 
-__author__ = 'Tom Schaul, tom@idsia.ch and Daan Wierstra'
+__author__ = 'Tom Schaul, tom@idsia.ch and Daan Wierstra, review by zjw@ecust'
 
 from datasets import AnBnCnDataSet    # @UnresolvedImport
 from pybrain.supervised import BackpropTrainer
