@@ -38,30 +38,25 @@ def evalRnnOnSeqDataset(net, DS, verbose=False, silent=False):
         net.reset()
         for i, t in seq:
             res = net.activate(i)
-            if verbose:
-                print(t, res)
             r += sum((t - res)**2)
             samples += 1
-        if verbose:
-            print('-' * 20)
     r /= samples
-    if not silent:
-        print('MSE:', r)
+    print('zjw:', r)
     return r
 
-if __name__ == "__main__":
-    N = buildParityNet()
-    DS = ParityDataSet()
-    evalRnnOnSeqDataset(N, DS, verbose=True)
-    print('(preset weights)')
-    N.randomize()
-    evalRnnOnSeqDataset(N, DS)
-    print('(random weights)')
+N = buildParityNet()
+N.randomize()
+DS = ParityDataSet()
+RMES = evalRnnOnSeqDataset(N, DS)
+print('preset weights', RMES)
+N.randomize()
+RMES = evalRnnOnSeqDataset(N, DS)
+print('random weights', RMES)
 
-    # Backprop improves the network performance, and sometimes even finds the
-    # global optimum.
-    N.reset()
-    bp = BackpropTrainer(N, DS, verbose=True)
-    bp.trainEpochs(5000)
-    evalRnnOnSeqDataset(N, DS)
-    print('(backprop-trained weights)')
+# Backprop improves the network performance, and sometimes even finds the
+# global optimum.
+# N.reset()
+# bp = BackpropTrainer(N, DS, verbose=True)
+# bp.trainEpochs(50)
+# evalRnnOnSeqDataset(N, DS)
+# print('(backprop-trained weights)')
