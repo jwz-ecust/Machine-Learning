@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 __author__ = 'Michael Isik'
 
 
@@ -12,12 +13,14 @@ class SuperimposedSine(object):
 
     def __init__(self, lambdas=[1.]):
         self.lambdas = array(lambdas, float)
-        self.yScales = ones(len(self.lambdas))
+        self.yScales = ones(self.lambdas.shape)
 
     def getFuncValue(self, x):
         val = 0.
         for i, l in enumerate(self.lambdas):
-            val += sin(x * l) * self.yScales[i]
+            print i, l, self.yScales[i]
+            val += sin(x * l) * self.yScales[i]     # 这里x*l的单位不是度数
+            print val
         return val
 
     def getFuncValues(self, x_array):
@@ -41,16 +44,10 @@ def generateSuperimposedSineData(sinefreqs, space, yScales=None):
 
 sinefreqs = (0.2, 0.311, 0.42, 0.51, 0.74)
 metascale = 8.
-
 scale = 0.5 * metascale
 stepsize = 0.1 * metascale
+zz = SuperimposedSine(sinefreqs)
+space = arange(1, 10)
 
-trnInputSpace = arange(0 * scale, 190 * scale, stepsize)
-trnData = generateSuperimposedSineData(sinefreqs, trnInputSpace)
-
-tstInputSpace = arange(400 * scale, 540 * scale, stepsize)
-tstData = generateSuperimposedSineData(sinefreqs, tstInputSpace)
-
-zjw = SuperimposedSine(sinefreqs)
-print zjw.getFuncValue(trnInputSpace)
-print zjw.getFuncValues(trnInputSpace)
+a = zz.getFuncValue(space)
+print a, space
