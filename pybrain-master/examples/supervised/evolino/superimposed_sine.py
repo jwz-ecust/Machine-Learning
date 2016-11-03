@@ -76,8 +76,9 @@ tstSequenceTarget = tstSequence[separatorIdx:]
 
 
 ion()  # switch matplotlib to interactive mode
-for i in range(3000):
+for i in range(1000):
     print("======================")
+    print("======The %d time=====" % (i + 1))
     print("====== NEXT RUN ======")
     print("======================")
 
@@ -113,7 +114,8 @@ for i in range(3000):
     plot(tstSequenceOutput, "b-")
 
     # create a legend
-    # figlegend((targetline, outputline), ('target', 'output'), ('upper right'))
+    # figlegend((targetline, outputline), ('target', 'output'), ('upper
+    # right'))
 
     # draw everything
     draw()
