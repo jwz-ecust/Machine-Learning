@@ -1,6 +1,8 @@
 import requests
 import re
-
+import sys
+for i in range(100):
+    print i
 
 s = requests.Session()
 
