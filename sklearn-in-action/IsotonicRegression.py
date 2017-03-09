@@ -13,9 +13,9 @@ n = 100
 x = np.arange(n)
 rs = check_random_state(0)
 y = rs.randint(-50, 50, size=(n,)) + 50. * np.log(1 + np.arange(n))
+# 生成微扰的序列 -- 不全是升序的序列
 
-
-ir = IsotonicRegression()
+ir = IsotonicRegression()   #  保序回归, 保持不降序
 y_ = ir.fit_transform(x, y)
 lr = LinearRegression()
 lr.fit(x[:, np.newaxis], y)
