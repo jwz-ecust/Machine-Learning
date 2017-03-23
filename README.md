@@ -23,3 +23,7 @@ Matlab
 
 
 Pybrain  *
+
+Scikit Learn
+Pytorch
+Tensor Flow
